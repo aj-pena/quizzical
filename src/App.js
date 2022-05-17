@@ -5,33 +5,27 @@ import Start from './Start'
 import './App.css';
 
 function App() {
-
+  console.log('App mounted')
+  const [ reset , setReset] = React.useState( false )
   const [ start, setStart ] =React.useState( false )
   const [ questions, setQuestions ] = React.useState( [] )
   const [ checkedAnswers, setCheckedAnswers ] = React.useState ( false )
-
-  // function startGame(){
-  //   fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
-  //   .then( res => res.json() )
-  //   .then( data => console.log(data.results) )
-
-  // }
-  // startGame()
-
-  function rndmOrder(){
-    const indexArr = []
-    while(indexArr.length < 4){
-      const num = Math.floor(Math.random()*4)
-      if(!indexArr.includes(num)){
-        indexArr.push(num)
-      }
-    }
-    return indexArr
+  
+  React.useEffect( () => {
+    fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
+    .then( res => res.json() )
+    .then( data => setQuestions( data.results ) )
+  } , [ reset ])
+  
+  function startGame(){
+    setStart( true )
   }
-  console.log(rndmOrder())
+  
+  const questionsArr = questions.map( item => <Question data={item}/> )
+  // console.log( questionsArr )
   return (
     <div className="App">
-      { start ? <div> Questions will go here </div> : <Start /> }
+      { start ? <div className='questions-container'> {questionsArr} </div>  : <Start startGame={startGame} /> }
     </div>
   );
 }
