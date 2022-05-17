@@ -2,6 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  function startGame(){
+    fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
+    .then( res => res.json() )
+    .then( data => console.log(data.results) )
+
+  }
+  startGame()
   return (
     <div className="App">
       <header className="App-header">
