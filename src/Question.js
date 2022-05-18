@@ -25,10 +25,10 @@ export default function Question({data}) {
       <h3 className='question-text'> {data.question} </h3> 
       {/* Random values of [arr] allow to retrieve values of [options] in different order */}
       <ul className='list-of-options'>        
-        <li className='question-option'> { options[ arr[0] ] } </li>
-        <li className='question-option'> { options[ arr[1] ] } </li>
-        <li className='question-option'> { options[ arr[2] ] } </li>
-        <li className='question-option'> { options[ arr[3] ] } </li>
+        <li className='question-option neutral'> { options[ arr[0] ] } </li>
+        <li className='question-option neutral'> { options[ arr[1] ] } </li>
+        <li className='question-option neutral'> { options[ arr[2] ] } </li>
+        <li className='question-option neutral'> { options[ arr[3] ] } </li>
       </ul>
       <hr></hr>
     </div>

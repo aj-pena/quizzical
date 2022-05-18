@@ -1,3 +1,4 @@
+/* General styling */
 body,
 html{
   margin:0;
@@ -10,6 +11,8 @@ html{
   box-sizing: border-box;  
   font-size: 1.25rem;
 }
+/* App*/
+  /* Group styling */
 .App,
 .start{
   display: flex;
@@ -22,6 +25,7 @@ html{
   min-height: 100vh;
   background-color: #F5F7FB;
 }
+/* Start Component */
 .title,
 .description{
   margin:0;
@@ -38,16 +42,61 @@ html{
   font-weight: 300;
   margin-bottom: 2.5em; 
 }
-.btn-start{  
-  padding: 1em 3em;
-  font-size: 1.125rem;
+/* Questions */
+.questions-container{
+  padding: 1em;
+  background-color: #F5F7FB;
+}
+.question-card{
+}
+.question-text{}
+.list-of-options{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.question-option{
+  border: #4D5B9E solid 2px;
+  border-radius: 15px;
+  padding: .4em 1.2em;
+  margin-bottom: .75em;
+  color: #293264;
+  max-width: 90%;
+}
+.question-option:last-child{
+  margin-bottom: 0;
+}
+.neutral{
+  background-color: none;
+}
+.selected{
+  border: none;
+  background-color: #D6DBF5;
+}
+.correct{
+  border: none;
+  background-color: #94D7A2;
+}
+.incorrect{
+  border:none;
+  background-color: #F8BCBC;
+}
+/* Buttons */
+.btn{  
   color:white;
   background-color: #4D5B9E;
   border: none;
   border-radius: 15px;
 }
-.questions-container{}
-.question-card{}
-.question-text{}
-.list-of-options{}
-.question-option{}
+.btn-start{  
+  padding: 1em 3em;
+  font-size: 1.125rem;  
+}
+.btn-secondary{
+  padding: .75em 1.25em;
+  margin-top: .75em;
+  margin-right: .75em;
+}
+

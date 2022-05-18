@@ -20,12 +20,25 @@ function App() {
   function startGame(){
     setStart( true )
   }
+
+  function checkAnswers(){}
+
+  function newGame(){
+    setReset(true)
+  }
+
+  
   
   const questionsArr = questions.map( item => <Question data={item}/> )
   // console.log( questionsArr )
   return (
     <div className="App">
-      { start ? <div className='questions-container'> {questionsArr} </div>  : <Start startGame={startGame} /> }
+      { start ? <div className='questions-container'> 
+      {questionsArr} 
+      <button className='btn btn-secondary'> Check Answers </button>
+      <button className='btn btn-secondary' onClick={newGame}> Play Again </button>
+      </div>  : 
+      <Start startGame={startGame} /> }
     </div>
   );
 }
