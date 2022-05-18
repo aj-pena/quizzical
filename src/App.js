@@ -1,12 +1,13 @@
 import React from 'react'
 import Question from './Question'
 import Start from './Start'
+import { nanoid } from 'nanoid'
 
 import './App.css';
 
 function App() {
   console.log('App mounted')
-  const [ reset , setReset] = React.useState( false )
+  const [ reset , setReset] = React.useState( 0 )
   const [ start, setStart ] =React.useState( false )
   const [ questions, setQuestions ] = React.useState( [] )
   const [ checkedAnswers, setCheckedAnswers ] = React.useState ( false )
@@ -24,12 +25,12 @@ function App() {
   function checkAnswers(){}
 
   function newGame(){
-    setReset(true)
+    setReset( prevState => prevState + 1 )
   }
 
   
   
-  const questionsArr = questions.map( item => <Question data={item}/> )
+  const questionsArr = questions.map( item => <Question data={item} key={nanoid()}/> )
   // console.log( questionsArr )
   return (
     <div className="App">
