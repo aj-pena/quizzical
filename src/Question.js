@@ -20,49 +20,15 @@ export default function Question({data}) {
       // Array that will hold all options, populated first with the incorrect answers
     const options = data.incorrect_answers
     // Correct answer pushed into the array of all options
-    options.push( data.correct_answer)
-
-    function select(e){
-      console.log(e.target)
-      // selects the element if neutral
-      if( e.target.classList.contains('neutral')){
-        e.target.classList.remove('neutral')
-        e.target.classList.add('selected')
-      }
-      // deselects the element if selected
-      if( e.target.classList.contains('selected')){
-        e.target.classList.remove('selected')
-        e.target.classList.add('neutral')
-      }
-      // setSelected( prevState => !prevState )
-    }
+    options.push( data.correct_answer)  
 
   return (
     <div className='question-card'>
       <h3 className='question-text'> {data.question} </h3> 
       {/* Random values of [arr] allow to retrieve values of [options] in different order */}
-      <ul className='list-of-options'>     
-         {options.map( option => <Option answer={option}/>)}
-        {/* <li className={ selected ? 'question-option selected' : 'question-option neutral' } 
-        key={nanoid()}
-        onClick={select}>
-           { options[ arr[0] ] }
-        </li>
-        <li className={ selected ? 'question-option selected' : 'question-option neutral' }
-         key={nanoid()}
-         onClick={select}>
-           { options[ arr[1] ] }
-        </li>
-        <li className={ selected ? 'question-option selected' : 'question-option neutral' }
-         key={nanoid()}
-         onClick={select}>
-           { options[ arr[2] ] }
-        </li>
-        <li className={ selected ? 'question-option selected' : 'question-option neutral' }
-         key={nanoid()}
-         onClick={select}>
-           { options[ arr[3] ] }
-        </li> */}
+      <ul className='list-of-options'>   
+        {/*turning array of options into JSX to display it correctly  */}
+         {options.map( option => <Option answer={option}/>)}        
       </ul>
       <hr></hr>
     </div>
