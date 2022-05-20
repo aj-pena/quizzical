@@ -6,7 +6,6 @@ import { nanoid } from 'nanoid'
 import './App.css';
 
 function App() {
-  console.log('App mounted')
   const [ reset , setReset] = React.useState( 0 )
   const [ start, setStart ] =React.useState( false )
   const [ questions, setQuestions ] = React.useState( [] )
@@ -31,12 +30,11 @@ function App() {
   
   
   const questionsArr = questions.map( item => <Question data={item} key={nanoid()}/> )
-  // console.log( questionsArr )
   return (
     <div className="App">
       { start ? <div className='questions-container'> 
       {questionsArr} 
-      <button className='btn btn-secondary'> Check Answers </button>
+      <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>
       <button className='btn btn-secondary' onClick={newGame}> Play Again </button>
       </div>  : 
       <Start startGame={startGame} /> }

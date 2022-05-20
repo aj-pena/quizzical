@@ -64,6 +64,7 @@ html{
   margin-bottom: .75em;
   color: #293264;
   max-width: 90%;
+  cursor: pointer;
 }
 .question-option:last-child{
   margin-bottom: 0;
