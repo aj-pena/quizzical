@@ -6,36 +6,43 @@ import { nanoid } from 'nanoid'
 import './App.css';
 
 function App() {
-  const [ reset , setReset] = React.useState( 0 )
+  const [ reset , setReset] = React.useState( false )
   const [ start, setStart ] =React.useState( false )
   const [ questions, setQuestions ] = React.useState( [] )
   const [ checkedAnswers, setCheckedAnswers ] = React.useState ( false )
   
   React.useEffect( () => {
+    
     fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple')
     .then( res => res.json() )
     .then( data => setQuestions( data.results ) )
-  } , [ reset ])
+
+    console.log('I fire once')
+
+  } , [])
   
   function startGame(){
     setStart( true )
   }
 
-  function checkAnswers(){}
+  function checkAnswers(){
+    setCheckedAnswers( prevState => !prevState)
+  }
 
   function newGame(){
-    setReset( prevState => prevState + 1 )
+    setReset( prevState => !prevState )
   }
 
   
   
-  const questionsArr = questions.map( item => <Question data={item} key={nanoid()}/> )
+  const questionsArr = questions.map( item => <Question data={item} key={nanoid()} checked={checkedAnswers}/> )
   return (
     <div className="App">
-      { start ? <div className='questions-container'> 
-      {questionsArr} 
-      <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>
-      <button className='btn btn-secondary' onClick={newGame}> Play Again </button>
+      { start ? 
+      <div className='questions-container'> 
+        {questionsArr} 
+        <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>
+        <button className='btn btn-secondary' onClick={newGame}> Play Again </button>
       </div>  : 
       <Start startGame={startGame} /> }
     </div>
