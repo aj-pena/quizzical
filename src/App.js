@@ -17,16 +17,15 @@ function App() {
     .then( res => res.json() )
     .then( data => setQuestions( data.results ) )
 
-    console.log('I fire once')
-
-  } , [])
+  } , [ reset ])
   
   function startGame(){
     setStart( true )
   }
 
   function checkAnswers(){
-    setCheckedAnswers( prevState => !prevState)
+    setCheckedAnswers( prevState => !prevState )
+    console.log('CHECKED ANSWERS ')
   }
 
   function newGame(){
