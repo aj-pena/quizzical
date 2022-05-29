@@ -87,7 +87,7 @@ function App() {
     setQuestions( prevQuestions => prevQuestions.map( question => {      
       let newQuestion 
       if(question.id === question_id){
-        const newChoices = question.choices.map( choice => choice.choice_id === choice_id ? { ...choice, selected: true } : choice )
+        const newChoices = question.choices.map( choice => choice.choice_id === choice_id ? { ...choice, selected: !choice.selected } : choice )
         newQuestion = {...question, choices : newChoices} 
       }else{
         newQuestion = question
