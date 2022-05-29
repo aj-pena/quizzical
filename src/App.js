@@ -44,7 +44,7 @@ function App() {
             answer: incorrect_answer,
             correct: false,
             selected: false,
-            verified: checkedAnswers
+            verified: false,
           }
           ) )
             // 1.2.2 correct answer
@@ -54,7 +54,7 @@ function App() {
               answer: object.correct_answer,
               correct: true,
               selected: false,
-              verified: checkedAnswers
+              verified: false,
             }
             )
           //1.3 Array to be populated with options in random order
@@ -73,17 +73,14 @@ function App() {
       // Save the original data to the data state just in case, for now.
       setData( data.results )
     } )
-    // eslint-disable-next-line
+
   } , [ reset ])  
 
   function startGame(){
     setStart( true )
   }
   
-  function select(choice_id, answer, question_id){
-    console.log('choice id: ', choice_id)
-    console.log('question id: ', question_id)
-    console.log( answer )
+  function select(choice_id, question_id){
     setQuestions( prevQuestions => prevQuestions.map( question => {      
       let newQuestion 
       if(question.id === question_id){
@@ -99,7 +96,15 @@ function App() {
   function checkAnswers(){
     
     setCheckedAnswers( prevState => !prevState )
-    console.log('CHECKED ANSWERS ')
+    setQuestions( prevQuestions => prevQuestions.map( question => {
+      const newChoices = question.choices.map( choice => ({...choice, verified: checkedAnswers  }))
+      return (
+        {
+          ...question, 
+          choices: newChoices,
+        }
+    )
+    } ))
   }
 
   function newGame(){

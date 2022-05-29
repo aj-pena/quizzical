@@ -22,7 +22,7 @@ export default function Option({id, answer, correct, selected, handleClick, veri
     <li 
       className={ classes } 
       id={ id } 
-      onClick={()=> handleClick( id, answer, question_id )} 
+      onClick={()=> handleClick( id, question_id )} 
     > 
     {answer} 
     </li>
