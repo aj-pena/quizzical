@@ -58,6 +58,7 @@ export default function Question({id, question, choices, select}) {
             verified={choice.verified}           
             handleClick={select}
             key={ choice.choice_id }
+            question_id={id}
          />)}        
       </ul>
       <hr></hr>

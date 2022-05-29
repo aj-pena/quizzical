@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Option({id, answer, correct, selected, handleClick, verified}) {
+export default function Option({id, answer, correct, selected, handleClick, verified, question_id}) {
   //variable to pass className to the list item, according to conditionals 
   let classes
    //NOT verified 
@@ -22,7 +22,7 @@ export default function Option({id, answer, correct, selected, handleClick, veri
     <li 
       className={ classes } 
       id={ id } 
-      onClick={()=> handleClick( id, answer )} 
+      onClick={()=> handleClick( id, answer, question_id )} 
     > 
     {answer} 
     </li>

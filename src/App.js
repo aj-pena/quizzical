@@ -13,8 +13,6 @@ function App() {
   const [ checkedAnswers, setCheckedAnswers ] = React.useState ( false )
   // questions state to save the array of question objects, each with an array of choices objects to pass a props
   const [questions, setQuestions] = React.useState( [] )
-  // manage the selected choices.
-  const [ selected, setSelected ] = React.useState( [] )  
   
   // generates an array with 4 numbers between 0 and 3, in random order.
   function randomOrder(){
@@ -75,16 +73,27 @@ function App() {
       // Save the original data to the data state just in case, for now.
       setData( data.results )
     } )
-
+    // eslint-disable-next-line
   } , [ reset ])  
 
   function startGame(){
     setStart( true )
   }
   
-  function select(id, answer){
-    console.log(id)
+  function select(choice_id, answer, question_id){
+    console.log('choice id: ', choice_id)
+    console.log('question id: ', question_id)
     console.log( answer )
+    setQuestions( prevQuestions => prevQuestions.map( question => {      
+      let newQuestion 
+      if(question.id === question_id){
+        const newChoices = question.choices.map( choice => choice.choice_id === choice_id ? { ...choice, selected: true } : choice )
+        newQuestion = {...question, choices : newChoices} 
+      }else{
+        newQuestion = question
+      }
+      return newQuestion
+    }))
   }
 
   function checkAnswers(){
@@ -97,7 +106,7 @@ function App() {
     setReset( prevState => !prevState )
   }  
   
-  const questionsArr = questions.map( question => <Question key={question.id} checked={checkedAnswers} {...question} select={select}/> )
+  const questionsArr = questions.map( question => <Question key={question.id} {...question} select={select}/> )
   return (
     <div className="App">
       { start ? 

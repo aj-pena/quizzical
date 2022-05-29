@@ -53,6 +53,72 @@ If 'Play again' button is clicked, startGame() function will be called, restarti
         length: 5
 }
 
- 
+DATA:
+{
+     category: "Art"
+    correct_answer: "Leonardo da Vinci"
+    difficulty: "easy"
+    incorrect_answers: Array(3)
+        0: "Pablo Picasso"
+        1: "Claude Monet"
+        2: "Vincent van Gogh"
+        length: 3
+        [[Prototype]]: Array(0)
+    question: "Who painted the Mona Lisa?"
+    type: "multiple"
+}
+
+QUESTION object with array of CHOICES
+{
+    id: ""
+    question: ""
+    choices: Array(4)
+        0: {
+                choice_id: ""
+                answer: "Pablo Picasso"
+                correct: false
+                selected: false
+                verified: false
+            }
+
+        1: {
+            
+                choice_id: ""
+                answer: "Claude Monet"
+                correct: false
+                selected: false
+                verified: false
+            
+            }
+        2: {}
+        4: {}
+        length: 4
+        
+}
+
+questions from state:
+
+0:
+    choices: Array(4)
+        0:
+            answer: "Kathy Griffin"
+            choice_id: "RL6EQtd62ShanhYOwjM2E"
+            correct: false
+            selected: false
+            verified: false
+            [[Prototype]]: Object
+        1: {choice_id: 'kRDoas5OccEXCIVv8Mkj9', answer: 'Uma Thurman', correct: true, selected: false, verified: false}
+        2: {choice_id: '6F2TWzFhUTL1j2sROZ7oX', answer: 'Bridget Fonda', correct: false, selected: false, verified: false}
+        3: {choice_id: 'kpA0Ssi4B4Ypm9lYvd271', answer: 'Pam Grier', correct: false, selected: false, verified: false}
+    length: 4
+    [[Prototype]]: Array(0)
+    id: "AQd48WcfHWMKBnZNXUayU"
+    question: "Which actress danced the twist with John Travolta in &#039;Pulp Fiction&#039;?"
+[[Prototype]]: Object
+1: {id: 'BCM1gavDzQAq86cjIZ62n', question: 'Which of these is a type of monster found in Minecraft?', choices: Array(4)}
+2: {id: 'SyxGDdvxKoiel1gEXC4YL', question: 'Which buzzword did Apple Inc. use to describe their removal of the headphone jack?', choices: Array(4)}
+3: {id: 'SzwCIyybKeH-yQoJbxvOG', question: 'Lanky, Funky, and Chunky are all characters featured in which series owned by Nintendo?', choices: Array(4)}
+4: {id: 'IvChygAc0HvvXZMbCfjx-', question: '&quot;Doctor Jones&quot;, &quot;Turn Back Time&quo…t; were UK number ones for which Eurodance group?', choices: Array(4)}
+length: 5
 
  -->
