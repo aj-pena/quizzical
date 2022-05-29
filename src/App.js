@@ -8,9 +8,6 @@ import './App.css';
 function App() {
   const [ reset , setReset] = React.useState( false )
   const [ start, setStart ] =React.useState( false )
-  // data state to save the array of objects obtained from the API: data.results
-  const [ data, setData ] = React.useState( [] )
-  const [ checkedAnswers, setCheckedAnswers ] = React.useState ( false )
   // questions state to save the array of question objects, each with an array of choices objects to pass a props
   const [questions, setQuestions] = React.useState( [] )
   
@@ -70,8 +67,6 @@ function App() {
       })
       // Save array of questions objects in the questions state
       setQuestions( questionsObjects )
-      // Save the original data to the data state just in case, for now.
-      setData( data.results )
     } )
 
   } , [ reset ])  
@@ -94,10 +89,8 @@ function App() {
   }
 
   function checkAnswers(){
-    
-    setCheckedAnswers( prevState => !prevState )
     setQuestions( prevQuestions => prevQuestions.map( question => {
-      const newChoices = question.choices.map( choice => ({...choice, verified: checkedAnswers  }))
+      const newChoices = question.choices.map( choice => ({...choice, verified: true  }))
       return (
         {
           ...question, 
