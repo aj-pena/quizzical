@@ -178,8 +178,17 @@ function App() {
       { start ? 
       <div className='questions-container'> 
         {questionsArr} 
-        { checkedAnswers ? <h4> You scored {score}/ 5 correct answers </h4> : <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>}
-        <button className='btn btn-secondary' onClick={newGame}> Play Again </button>
+        
+        { checkedAnswers ? 
+          <div className='buttons-container'>
+           <h4 className='score'> You scored {score}/ 5 correct answers </h4>
+           <button className='btn btn-secondary' onClick={newGame}> Play Again </button> 
+          </div> : 
+          <div className='buttons-container'>
+            <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>
+          </div>
+        }          
+        
       </div>  : 
       <Start startGame={startGame} /> }
     </div>
