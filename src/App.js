@@ -11,6 +11,8 @@ function App() {
   // questions state to save the array of question objects, each with an array of choices objects to pass a props
   const [questions, setQuestions] = React.useState( [] )
   const [ selected, setSelected ] = React.useState( [] )
+  const [ checkedAnswers, setCheckedAnswers ] = React.useState( false )
+  let score = 3
   console.log( selected )
   
   // generates an array with 4 numbers between 0 and 3, in random order.
@@ -144,6 +146,7 @@ function App() {
   }
 
   function checkAnswers(){
+    setCheckedAnswers( true )
     setQuestions( prevQuestions => prevQuestions.map( question => {
       const newChoices = question.choices.map( choice => ({...choice, verified: true  }))
       return (
@@ -166,7 +169,7 @@ function App() {
       { start ? 
       <div className='questions-container'> 
         {questionsArr} 
-        <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>
+        { checkedAnswers ? <h4> You scored {score}/ 5 correct answers </h4> : <button className='btn btn-secondary' onClick={checkAnswers}> Check Answers </button>}
         <button className='btn btn-secondary' onClick={newGame}> Play Again </button>
       </div>  : 
       <Start startGame={startGame} /> }
