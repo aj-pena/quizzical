@@ -100,14 +100,13 @@ function App() {
       if(!questionAlreadySelected){
         // select option for that question
         selectDeselect(question_id, choice_id)
-        setSelected( prevSelected => prevSelected.push(
-          { 
+        setSelected( prevSelected => [...prevSelected, { 
             is_selected: true,
             questionId: question_id,
             choiceId: choice_id
-          }
+          }]
         )
-      )
+      
       }
       //if nothing has yet been selected 
     }else{
