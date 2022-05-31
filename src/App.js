@@ -144,7 +144,6 @@ function App() {
       return newQuestion
     }))
   }
-
   function checkAnswers(){
     setCheckedAnswers( true )
     questions.forEach( question => {
@@ -164,12 +163,13 @@ function App() {
     )
     } ))
   }
-
   function newGame(){
     setReset( prevState => !prevState )
     setStart( false )
     setCheckedAnswers( false )
     setScore( 0 )
+    setQuestions( [] )
+    setSelected( [] )
   }  
   
   const questionsArr = questions.map( question => <Question key={question.id} {...question} select={select}/> )
