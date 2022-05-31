@@ -10,11 +10,7 @@ function App() {
   const [ start, setStart ] =React.useState( false )
   // questions state to save the array of question objects, each with an array of choices objects to pass a props
   const [questions, setQuestions] = React.useState( [] )
-  const [ selected, setSelected ] = React.useState( {
-    is_selected: false,
-    questionId: "",
-    choiceId: ""
-  } )
+  const [ selected, setSelected ] = React.useState( [] )
   console.log( selected )
   
   // generates an array with 4 numbers between 0 and 3, in random order.
@@ -79,71 +75,73 @@ function App() {
 
   function startGame(){
     setStart( true )
-  }
-
-  // function checkSelected(){
-  //   let isSelected = false
-  //   let questionId= ""
-  //   let selectedChoiceId = ""    
-  //   for( let i=0; i < questions.length; i++){
-  //     for(let j=0; j < questions[i].choices.length; j++){
-  //       if( questions[i].choices[j].selected){
-  //         isSelected = true
-  //         questionId = questions[i].id
-  //         selectedChoiceId = questions[i].choices[j].choice_id
-  //         console.log( 'An option is already selected: ', questions[i].choices[j].answer, selectedChoiceId  )
-  //       }
-  //     }
-  //   }
-  //   return (
-  //     {
-  //       is_Selected: isSelected,
-  //       question_id: questionId,
-  //       choice_id: selectedChoiceId,
-
-  //     }
-  //      )
-  // }
-  
+  }  
   function select(choice_id, question_id){
-   
-    // if there already is a selected choice and is not the one clicked: alert. 
-    // Otherwise: select/deselect
-    if( selected.is_selected && choice_id !== selected.choiceId){
-      alert("You can only select one option")
-    }else{
-      // let choiceIsSelected = false
-      setQuestions( prevQuestions => prevQuestions.map( question => {      
-        let newQuestion 
-        if(question.id === question_id){
-          const newChoices = question.choices.map( choice => {
-            let newChoice
-            if(choice.choice_id === choice_id ){
-              newChoice = { ...choice, selected: !choice.selected } 
-              // choiceIsSelected = !choice.selected
-            } else { 
-              newChoice = choice 
-            } 
-          
-          return newChoice
-          })
-          newQuestion = {...question, choices : newChoices} 
-        }else{
-          newQuestion = question
+    // If there are selected options
+    if( selected.length > 0 ){
+      let questionAlreadySelected = false
+      // Go through the selected options
+      for( let i = 0; i < selected.length; i++){
+        // if the clicked question already has a selected option
+        if( selected[i].questionId === question_id){
+          questionAlreadySelected = true
+          // if the selected option is the same one that was clicked
+          if( selected[i].choiceId === choice_id){
+            // deselect
+            selectDeselect(question_id, choice_id)
+            // Erase selected option from selected state array by filtering all options that are not the one clicked
+            setSelected( prevSelected => prevSelected.filter( option => option.choiceId !== choice_id ))
+          }else{
+            alert( "You can only choose one option ")
+          }
         }
-        return newQuestion
-      }))
-      setSelected( prevSelected => (
+      }
+      // If already a selected option for the question, check if same choice as clicked
+      if(!questionAlreadySelected){
+        // select option for that question
+        selectDeselect(question_id, choice_id)
+        setSelected( prevSelected => prevSelected.push(
           { 
-            is_selected: !prevSelected.is_selected,
+            is_selected: true,
             questionId: question_id,
             choiceId: choice_id
           }
         )
       )
-    }
+      }
+      //if nothing has yet been selected 
+    }else{
+      selectDeselect(question_id, choice_id)
+      setSelected( [
+          { 
+            is_selected: true,
+            questionId: question_id,
+            choiceId: choice_id
+          } ]
+      )      
+    }    
+  }
+  function selectDeselect (question_id, choice_id){
+    setQuestions( prevQuestions => prevQuestions.map( question => {      
+      let newQuestion 
+      if(question.id === question_id){
+        const newChoices = question.choices.map( choice => {
+          let newChoice
+          if(choice.choice_id === choice_id ){
+            newChoice = { ...choice, selected: !choice.selected } 
+            
+          } else { 
+            newChoice = choice 
+          } 
         
-    
+        return newChoice
+        })
+        newQuestion = {...question, choices : newChoices} 
+      }else{
+        newQuestion = question
+      }
+      return newQuestion
+    }))
   }
 
   function checkAnswers(){
