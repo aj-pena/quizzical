@@ -12,7 +12,7 @@ function App() {
   const [questions, setQuestions] = React.useState( [] )
   const [ selected, setSelected ] = React.useState( [] )
   const [ checkedAnswers, setCheckedAnswers ] = React.useState( false )
-  let score = 3
+  const [ score, setScore ] = React.useState( 0 )
   console.log( selected )
   
   // generates an array with 4 numbers between 0 and 3, in random order.
@@ -147,6 +147,13 @@ function App() {
 
   function checkAnswers(){
     setCheckedAnswers( true )
+    questions.forEach( question => {
+      question.choices.forEach( choice => {
+        if( choice.selected && choice.correct){
+          setScore( prevScore => prevScore + 1)
+        }
+      })
+    })
     setQuestions( prevQuestions => prevQuestions.map( question => {
       const newChoices = question.choices.map( choice => ({...choice, verified: true  }))
       return (
@@ -161,6 +168,8 @@ function App() {
   function newGame(){
     setReset( prevState => !prevState )
     setStart( false )
+    setCheckedAnswers( false )
+    setScore( 0 )
   }  
   
   const questionsArr = questions.map( question => <Question key={question.id} {...question} select={select}/> )
